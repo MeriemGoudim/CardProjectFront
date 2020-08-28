@@ -1,0 +1,62 @@
+<h2>Client Details</h2> 
+
+<hr/>
+<div *ngIf="client">
+  <div>
+    <label><b>Code Client: </b></label> {{client.cdclt}}
+  </div>
+  <div>
+    <label><b>Libelle Client C: </b></label> {{client.libcltc}}
+  </div>
+  <div>
+    <label><b>Libelle Client E: </b></label> {{client.libclte}}
+  </div>  
+  <div>
+    <label><b>Type Client: </b></label> {{client.tpclt}}
+  </div> 
+  <div>
+    <label><b>Rue 1: </b></label> {{client.rueclt1}}
+  </div> 
+  <div>
+    <label><b>Rue 2: </b></label> {{client.rueclt2}}
+  </div> 
+  <div>
+    <label><b>Ville: </b></label> {{client.vilclt}}
+  </div> 
+  <div>
+    <label><b>Pays: </b></label> {{client.payclt}}
+  </div> 
+  <div>
+    <label><b>Numéro de téléphone 1: </b></label> {{client.telclt1}}
+  </div> 
+  <div>
+    <label><b>Numéro de téléphone 2: </b></label> {{client.telclt2}}
+  </div> 
+  <div>
+    <label><b>Numéro de téléphone 3: </b></label> {{client.telclt3}}
+  </div> 
+  <div>
+    <label><b>Numéro de fax 1: </b></label> {{client.faxclt1}}
+  </div> 
+  <div>
+    <label><b>Numéro de fax 2: </b></label> {{client.faxclt1}}
+  </div> 
+  <div>
+    <label><b>NBTPCRT: </b></label> {{client.nbtrcpt}}
+  </div> 
+  <div>
+    <div>
+        <label><b>OBSCLT: </b></label> {{client.obsclt}}
+      </div> 
+      <div>
+    <label><b>ORDCHM: </b></label> {{client.ordchm}}
+  </div> 
+  <div>
+    <label><b>VALTMP: </b></label> {{client.valtmp}}
+  </div> 
+
+</div>
+
+<br>
+<br>
+<button (click)="list()" class="btn btn-primary">Back to Client List</button><br>

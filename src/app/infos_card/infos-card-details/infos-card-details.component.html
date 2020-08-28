@@ -1,0 +1,31 @@
+<div class="container" *ngIf="infosCard">
+    <div class="panel panel-default">
+        <div class="panel-heading">SUIVI DEMANDE CARTE</div>
+            <div class="panel-body">
+                <fieldset class="col-md-6">    	
+                    <legend>GENERALE</legend>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <label>
+                                    CLIENT :
+                                    <span id="infosCarte" class="badge badge-pill badge-light">{{infosCard.client.libclte}}</span>
+                                </label>
+                                <label>
+                                    INTITULE CARTE : 
+                                    <span  id="infosCarte" class="badge badge-pill badge-light">{{infosCard.intituleCarte}}</span>
+                                </label>
+                                <label>
+                                    ICA :
+                                    <span id="infosCarte" class="badge badge-pill badge-light">{{infosCard.ica}}</span>
+                                </label>
+                                <label>
+                                   PRODUIT : 
+                                    <span id="infosCarte" class="badge badge-pill badge-light">{{infosCard.typeProduit}}</span>
+                                </label>
+                            </div>
+                        </div>  
+                </fieldset>				
+                    <div class="clearfix"></div>
+            </div>                
+    </div>
+</div>

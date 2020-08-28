@@ -1,0 +1,197 @@
+<!-- MultiStep Form -->
+    <div class="row justify-content-center">
+        <div class="col-11 col-sm-9 col-md-7 col-lg-10 text-center p-0 mt-3 mb-2">
+            <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                <h2><strong>NOUVEAU PROJET CARTE </strong></h2>
+                <div class="row">
+                    <div class="col-md-12 mx-0">
+                      <div [hidden]="submitted">
+                        <form id="msform" (ngSubmit)="onSubmit()">
+                            <!-- progressbar -->
+                            <ul id="progressbar">
+                                <li class="active" id="generale"><strong>Générale</strong></li>
+                                <li id="referencePuce"><strong>Référence Puce</strong></li>
+                                <li id="impressionVisuel"><strong>Impression Visuel</strong></li>
+                                <li id="generale"><strong>Personnalisation</strong></li>
+                                <li id="confirm"><strong>Terminer</strong></li>
+                            </ul> <!-- fieldsets -->
+                            <fieldset>
+                              <div class="row">
+                                <div class="col-md-6">
+                                <div class="form-card">
+                                  <select [(ngModel)]="idClient" id="client"  required [ngModelOptions]="{standalone: true}">
+                                    <option selected="selected" disabled > Sélectionner un client</option>
+                                  <option *ngFor="let clt of (clients | async)" value={{clt.id}}>
+                                     {{ clt.libcltc }} , {{clt.id}}
+                                    </option>
+                                  </select> 
+                                  
+                                    <input type="text" id="intituleCarte" required [(ngModel)]="infosCard.intituleCarte" name="intituleCarte" placeholder="INTITULE CARTE" /> 
+                                    <input type="text" id="ica" required [(ngModel)]="infosCard.ica" name="ica" placeholder="ICA" /> 
+                                    <input type="text" id="typeProduit" required [(ngModel)]="infosCard.typeProduit" name="typeProduit" placeholder="PRODUIT" /> 
+                                    <input type="text" id="bin" required [(ngModel)]="infosCard.bin" name="typeProduit" placeholder="BIN" />
+                                    <label>
+                                      Puce <input type="checkbox" name="puce" id="puce" classe="checkcenter" [(ngModel)]="infosCard.puce"/>
+                                      Piste <input type="checkbox" name="piste" id="piste" classe="checkcenter" [(ngModel)]="infosCard.piste"/>
+                                    </label>
+                                </div> 
+                                </div>
+                              <div class="col-md-6">
+                                <div class="form-card">
+                                  <select [(ngModel)]="idFournisseur" id="fournisseur" required [ngModelOptions]="{standalone: true}">
+                                    <option [ngValue]="" selected="selected" disabled> Sélectionner un fournisseur</option>
+                                    <option *ngFor="let frn of fournisseurs | async" value={{frn.id}}>
+                                      {{ frn.nom }}
+                                    </option>
+                                  </select>
+                                  <label>ODA : &nbsp; &nbsp; &nbsp; CDA <input type="checkbox" name="oda" id="cda" [(ngModel)]="infosCard.cda"/>
+                                        DDA <input type="checkbox" name="oda" id="dda" [(ngModel)]="infosCard.dda"/>
+                                        SDA <input type="checkbox" name="oda" id="sda" [(ngModel)]="infosCard.sda"/></label> 
+                                  <select [(ngModel)]="infosCard.scheime" id="scheime" required [ngModelOptions]="{standalone: true}">
+                                    <option selected="selected" disabled> Sélectionner un scheme</option>
+                                    <option *ngFor="let scheime of scheimes | async" [value]="scheime">
+                                      {{ scheime }}
+                                    </option>
+                                  </select>
+                                  <label>INTERFACE : &nbsp;
+                                    CONTACT<input type="checkbox" name="contact" id="contact" [(ngModel)]="infosCard.contact"/>
+                                    CONTACTLESS<input type="checkbox" name="contactless" id="contactless" [(ngModel)]="infosCard.contactLess"/>
+                                  </label>
+                                  <select id="paiement" name="paiement" [(ngModel)]="infosCard.paiement">
+                                    <option [ngValue]="" selected="selected" disabled> Sélectionner un moyen de paiement</option>
+                                    <option  *ngFor=" let option of moyenPaiement" [value]="option">{{option}}</option>
+                                  </select>
+                                </div> 
+                              </div>
+                            </div>
+                                <input type="button" name="next" class="next action-button" value="Suivant" />
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-card">
+                                    <input type="text" name="fabriquantPuce" placeholder="FABRIQUANT PUCE" [(ngModel)]="infosCard.fabriquantPuce"/> 
+                                    <input type="text" name="typePuce" placeholder="TYPE PUCE" [(ngModel)]="infosCard.typePuce"/> 
+                                    <input type="text" name="capacitePuce" placeholder="CAPACITE PUCE" [(ngModel)]="infosCard.capacitePuce"/> 
+                                    <label>EXPIRATION PUCE : <input type="date" name="dateExpirationPuce" [(ngModel)]="infosCard.dateExpPuce"/></label>
+                                    <input type="text" name="masquePuce" placeholder="MASQUE PUCE" [(ngModel)]="infosCard.masquePuce"/> 
+                                    <input type="text" name="refVisaMc" placeholder="REFERENCE VISA / MC" [(ngModel)]="infosCard.refVisaMc"/>
+                                    <div *ngIf="currentFile" class="progress">
+                                      <div
+                                        class="progress-bar progress-bar-info progress-bar-striped"
+                                        role="progressbar"
+                                        attr.aria-valuenow="{{ progress }}"
+                                        aria-valuemin="0"
+                                        aria-valuemax="100"
+                                        [ngStyle]="{ width: progress + '%' }"
+                                      >
+                                        {{ progress }}%
+                                      </div>
+                                    </div>
+                                      <input type="file" (change)="selectFile($event)" />
+                                    <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">Upload</button>
+                                    <div class="alert alert-light" role="alert">{{ message }}</div>
+                                    </div>
+                                <input type="button" name="previous" class="previous action-button-previous" value="Précédent" /> 
+                                 <input type="button" name="next" class="next action-button" value="Suivant" />
+                            </fieldset>
+                            <fieldset>
+                              <div class="form-card">
+                                        <input type="text" name="couleurRecto" placeholder="COULEUR RECTO" [(ngModel)]="infosCard.couleurRecto"/> 
+                                        <input type="text" name="couleurVerso" placeholder="COULEUR VERSO" [(ngModel)]="infosCard.couleurVerso"/> 
+                                        <input type="text" name="effetsSpeciaux" placeholder="EFFETS SPECIAUX" [(ngModel)]="infosCard.effetsSpeciaux" /> 
+                                        <input type="text" name="autres" placeholder="AUTRES" [(ngModel)]="infosCard.autresEffets"/> 
+                                        <input type="text" name="panneauSignature" placeholder="PANNEAU SIGNATURE" [(ngModel)]="infosCard.panneauSignature" />
+                                        <select id="finition" name="finition" [(ngModel)]="infosCard.finition">
+                                          <option [ngValue]="" selected="selected" DISABLED> Sélectionner une finition </option>
+                                          <option  *ngFor=" let option of finitions" [value]="option">{{option}}</option>
+                                        </select>
+                                        <input type="text" name="hologramme" placeholder="HOLOGRAMME PARTICULIER" [(ngModel)]="infosCard.hologramme"/>
+                                        <input type="text" name="laminat" placeholder="LAMINAT" [(ngModel)]="infosCard.laminat"/>
+                                        <div *ngIf="currentFile" class="progress">
+                                          <div
+                                            class="progress-bar progress-bar-info progress-bar-striped"
+                                            role="progressbar"
+                                            attr.aria-valuenow="{{ progress }}"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                            [ngStyle]="{ width: progress + '%' }"
+                                          >
+                                            {{ progress }}%
+                                          </div>
+                                        </div>
+                                          <input type="file" (change)="selectFile($event)" />
+                                        <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">Upload</button>
+                                        <div class="alert alert-light" role="alert">{{ message }}</div>
+                                        
+                              </div>
+                                    <input type="button" name="previous" class="previous action-button-previous" value="Précédent" /> 
+                                     <input type="button" name="next" class="next action-button" value="Suivant" />
+                            </fieldset>
+                            <fieldset>
+                              <div class="row">
+                              <div class="col-md-4">
+                                <div class="form-card">
+                                  <select id="typeImpression" name="typeImpression" [(ngModel)]="infosCard.typeImpRecto">
+                                    <option [ngValue]="" selected="selected" disabled>TYPE D'IMPRESSION</option>
+                                    <option  *ngFor=" let option of typeImp" [value]="option" selected>{{option}}</option>
+                                  </select> 
+                                  <input type="text" name="couleurImp" placeholder="COULEUR" [(ngModel)]="infosCard.couleurImp"/> 
+                                  <label>DATE RECEPTION FICHIER VISUEL : <input type="date" name="dateReceptionFV" [(ngModel)]="infosCard.dateReceptionFV"/></label> 
+                                  <label>DATE D'ENVOI DU VISUEL AU FRS : <input type="date" name="dateEnvoiVisuelFr" [(ngModel)]="infosCard.dateEnvoiVisuelFr"/></label>
+                                  <label>DATE RECEPTION : <input type="date" name="dateReception" [(ngModel)]="infosCard.dateReception"/></label>
+                                  <input type="text" name="refVisuel" placeholder="REFERENCE VISUEL" [(ngModel)]="infosCard.refVisuel"/> 
+                                  <label>DATE ENVOI PDF AU CLIENT: <input type="date" name="dateEnvoiPdfClt" [(ngModel)]="infosCard.dateEnvoiPdfClt"/></label>
+                                  <label>1ère VERSION : <input type="date" name="dateEnvoiPdfCltVr1" [(ngModel)]="infosCard.dateEnvoiPdfCltVr1"/></label>
+                                  <label>2ème VERSION : <input type="date" name="dateEnvoiPdfCltVr2" [(ngModel)]="infosCard.dateEnvoiPdfCltVr2"/></label>
+                                  <label>3ème VERSION : <input type="date" name="dateEnvoiPdfCltVr3" [(ngModel)]="infosCard.dateEnvoiPdfCltVr3"/></label>
+                                </div>
+                                </div> 
+                                <div class="col-md-4">
+                                  <div class="form-card">
+                                    <label>DATE VALIDATION CLIENT : <input type="date" name="dateValidationClt" [(ngModel)]="infosCard.dateValidationClt"/></label>
+                                    <label>DATE RECEPTION CHROMALIN : <input type="date" name="dateReceptionChromalin" [(ngModel)]="infosCard.dateReceptionChromalin"/></label>
+                                    <label>DATE SOUMISSION A VISA / MC : <input type="date" name="dateSoumissionVisaMc" [(ngModel)]="infosCard.dateSoumissionVisaMc"/></label>
+                                    <label>DATE RECEPTION CHROMALIN : <input type="date" name="dateReceptionChromalin" [(ngModel)]="infosCard.dateReceptionChromalin"/></label>
+                                    <label>DATE RECEPTION CHROMALIN: <input type="date" name="dateReceptionChromalin" [(ngModel)]="infosCard.dateReceptionChromalin"/></label>
+                                    <label>DATE SOUMISSION A VISA / MC: <input type="date" name="dateSoumissionVisaMc" [(ngModel)]="infosCard.dateSoumissionVisaMc"/></label>
+                                    <label>DATE RESOUMISSION A VISA / MC: <input type="date" name="dateResoumissionVisaMc" [(ngModel)]="infosCard.dateResoumissionVisaMc"/></label>
+                                    <input type="number" name="numSoumission" placeholder="N SOULMISSION"  [(ngModel)]="infosCard.numSoumission"/>
+                                  </div> 
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-card">
+                                  <label>DATE APPROBATION VISA / MC: <input type="date" name="dateApprobationVisaMc" [(ngModel)]="infosCard.dateApprobationVisaMc"/></label>
+                                  <label>DATE BON DE CDE S2M: <input type="date" name="dateBonCdeS2M" [(ngModel)]="infosCard.dateBonCdeS2M"/></label>
+                                  <input type="number" name="numBonCdeS2M" placeholder="N BON CDE DE S2M"  [(ngModel)]="infosCard.numBonCdeS2M"/>
+                                  <input type="number" name="quantite" placeholder="QUANTITE"  [(ngModel)]="infosCard.quantite"/>
+                                  <label>DATE ENLEVEMENT: <input type="date" name="dateEnlevement" [(ngModel)]="infosCard.dateEnlevement"/></label>
+                                  <label>DATE RECEPTION S2M: <input type="date" name="dateReceptionS2M" [(ngModel)]="infosCard.dateReceptionS2M"/></label>
+                                  <label>
+                                    FACTURATION A LA LIVRAISON: <input type="checkbox" name="facturationLivraison" id="facturationLivraison" [(ngModel)]="infosCard.facturationLivraison"/>
+                                  </label>
+                                  <input type="number" name="numFacture" placeholder="N FACTURE"  [(ngModel)]="infosCard.numFacture"/>
+                                  <label>DATE FACTURE: <input type="date" name="dateFacture" [(ngModel)]="infosCard.dateFacture"/></label>
+                                </div> 
+                                </div>
+                              </div>
+                                <input type="button" name="previous" class="previous action-button-previous" value="Précédent" />
+                                <input type="button" name="next" class="next action-button" value="Suivant" />
+                            </fieldset>
+                            <fieldset>
+                              <div class="form-card">
+                                <div class="form-group shadow-textarea">
+                                  <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="5" placeholder="ECRIRE VOTRE COMMENTAIRE..."  [(ngModel)]="infosCard.commentaire"></textarea>
+                                </div>
+                              </div>
+                              <input type="button" name="previous" class="previous action-button-previous" value="Précédent" />
+                              <button type="submit" class="next action-button">Valider</button>
+                            </fieldset>
+                            
+                        </form>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  

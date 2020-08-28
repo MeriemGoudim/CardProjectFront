@@ -1,0 +1,33 @@
+<div class="panel panel-info">
+    <div class="panel-heading">
+      <h2>Client List</h2>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Code client</th>
+            <th>Libelle Client C</th>
+            <th>Libelle Client E</th>
+            <th>Type Client</th>
+            <th>ORDCHM</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let client of clients | async">
+            <td>{{client.cdclt}}</td>
+            <td>{{client.libcltc}}</td>
+            <td>{{client.libclte}}</td>
+            <td>{{client.tpclt}}</td>
+            <td>{{client.ordchm}}</td>
+            <td><button (click)="deleteClient(client.id)" class="btn btn-danger">Delete</button>
+                <button (click)="updateClient(client.id)" class="btn btn-info" style="margin-left: 5px">Update</button>
+                <button (click)="clientDetails(client.id)" class="btn btn-info" style="margin-left: 5px">Details</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

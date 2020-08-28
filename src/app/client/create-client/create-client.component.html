@@ -1,0 +1,101 @@
+<h3>Create Client</h3>
+<div [hidden]="submitted">
+  <form (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col-md-6">
+    <div class="form-group">
+      <label for="name">Code Client</label>
+      <input type="text" class="form-control input-sm" id="cdclt" required [(ngModel)]="client.cdclt" name="cdclt">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Libelle Client C</label>
+      <input type="text" class="form-control input-sm" id="libcltc" required [(ngModel)]="client.libcltc" name="libcltc">
+    </div>
+
+    <div class="form-group">
+      <label for="name">First Libelle Client E</label>
+      <input type="text" class="form-control input-sm" id="libclte" required [(ngModel)]="client.libclte" name="libclte">
+    </div>
+
+    <div class="form-group">
+        <label for="name">Type Client</label>
+        <input type="text" class="form-control input-sm" id="tpclt" required [(ngModel)]="client.tpclt" name="tpclt">
+      </div>
+
+      <div class="form-group">
+        <label for="name">Rue 1</label>
+        <input type="text" class="form-control input-sm" id="rueclt1" required [(ngModel)]="client.rueclt1" name="rueclt1">
+      </div>
+
+      <div class="form-group">
+        <label for="name">Rue 2</label>
+        <input type="text" class="form-control input-sm" id="rueclt2" required [(ngModel)]="client.rueclt2" name="rueclt2">
+      </div>
+
+      <div class="form-group">
+        <label for="name">Ville</label>
+        <input type="text" class="form-control input-sm" id="vilclt" required [(ngModel)]="client.vilclt" name="vilclt">
+      </div>
+
+      <div class="form-group">
+        <label for="name">Pays</label>
+        <input type="text" class="form-control input-sm" id="payclt" required [(ngModel)]="client.payclt" name="payclt">
+      </div>
+        
+      <div class="form-group">
+        <label for="name">Numéro de téléphone 1</label>
+        <input type="tel" class="form-control input-sm" id="telclt1" required [(ngModel)]="client.telclt1" name="telclt1">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="name">Numéro de téléphone 2</label>
+        <input type="tel" class="form-control input-sm" id="telclt2" required [(ngModel)]="client.telclt2" name="telclt2">
+      </div>
+
+      <div class="form-group">
+        <label for="name">Numéro de téléphone 3</label>
+        <input type="tel" class="form-control input-sm" id="telclt3" required [(ngModel)]="client.telclt3" name="telclt3">
+      </div>
+
+      <div class="form-group">
+        <label for="name">Numéro de fax 1</label>
+        <input type="tel" class="form-control input-sm" id="faxclt1" required [(ngModel)]="client.faxclt1" name="faxclt1">
+      </div>
+
+      <div class="form-group">
+        <label for="name">Numéro de fax 2</label>
+        <input type="tel" class="form-control input-sm" id="faxclt2" required [(ngModel)]="client.faxclt2" name="faxclt2">
+      </div>
+
+      <div class="form-group">
+        <label for="name">NBTPCRT</label>
+        <input type="number" class="form-control input-sm" id="nbtrcpt" required [(ngModel)]="client.nbtrcpt" name="nbtrcpt">
+      </div>
+
+      <div class="form-group">
+        <label for="name">OBSCLT</label>
+        <input type="number" class="form-control input-sm" id="obsclt" required [(ngModel)]="client.obsclt" name="obsclt">
+      </div>
+
+      <div class="form-group">
+        <label for="name">ORDCHM</label>
+        <input type="text" class="form-control input-sm" id="ordchm" required [(ngModel)]="client.ordchm" name="ordchm">
+      </div>
+
+      <div class="form-group">
+        <label for="name">VALTMP</label>
+        <input type="number" class="form-control input-sm" id="valtmp" required [(ngModel)]="client.valtmp" name="valtmp">
+      </div>
+      <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+</div>
+
+  </form>
+</div>
+
+<div [hidden]="!submitted">
+  <h4>You submitted successfully!</h4>
+  <!-- <button class="btn btn-success" (click)="newClient()">Add</button> -->
+</div>

@@ -1,0 +1,33 @@
+<div class="panel panel-info">
+    <div class="panel-heading">
+      <h2>Infos Card List</h2>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Client</th>
+            <th>Intitulé carte</th>
+            <th>Produit</th>
+            <th>BIN</th>
+            <th>Scheme</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let infosCard of infosCards | async">
+            <td>{{infosCard.client.libclte}}</td>
+            <td>{{infosCard.intituleCarte}}</td>
+            <td>{{infosCard.typeProduit}}</td>
+            <td>{{infosCard.bin}}</td>
+            <td>{{infosCard.scheime}}</td>
+            <td><button (click)="deleteInfosCard(infosCard.id)" class="btn btn-danger">Delete</button>
+                <button (click)="updateInfosCard(infosCard.id)" class="btn btn-info" style="margin-left: 5px">Update</button>
+                <button (click)="infosCardDetails(infosCard.id)" class="btn btn-info" style="margin-left: 5px">Details</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
